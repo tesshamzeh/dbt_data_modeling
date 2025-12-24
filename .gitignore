@@ -3,3 +3,4 @@ dbt_packages/
 *.duckdb
 logs/
 .env
+dbt_venv/

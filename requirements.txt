@@ -1,0 +1,3 @@
+# Python 3.9.6 used
+dbt-core==1.10.17
+dbt-duckdb==1.10.0
