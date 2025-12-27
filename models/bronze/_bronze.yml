@@ -1,0 +1,20 @@
+
+version: 2
+
+models:
+  - name: testing_ingress
+    description: "confirming I can use source() effectively"
+    columns:
+      - name: id
+        description: "The primary key for the customers table"
+        data_tests:
+          - unique
+          - not_null
+      - name: signup_date
+        description: "Sign-up date for customer"
+      - name: status
+        description: "Customer status"
+      - name: region
+        description: "Customer region"
+        
+

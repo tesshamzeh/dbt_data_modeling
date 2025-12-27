@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw_data
+    tables:
+      - name: customers
+        config:
+          external_location: "data/customers.csv"
+      - name: plans
+        config:
+          external_location: "data/plans.csv"
+      - name: subscriptions
+        config:
+          external_location: "data/subscriptions.csv"
