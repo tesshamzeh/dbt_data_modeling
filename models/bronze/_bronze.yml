@@ -2,19 +2,76 @@
 version: 2
 
 models:
-  - name: testing_ingress
-    description: "confirming I can use source() effectively"
+  - name: bronze__customers
+    description: "Raw customer data with minimal transformation"
     columns:
-      - name: id
+      - name: customer_id
+        data_type: string
         description: "The primary key for the customers table"
-        data_tests:
+        tests:
           - unique
           - not_null
       - name: signup_date
+        data_type: date
         description: "Sign-up date for customer"
+        tests:
+          - not_null
       - name: status
+        data_type: string
         description: "Customer status"
+        tests:
+          - not_null
       - name: region
+        data_type: string
         description: "Customer region"
+
+  - name: bronze__plans
+    description: "Raw plan data with minimal transformation"
+    columns:
+      - name: plan_id
+        data_type: string
+        description: "The primary key for the plans table"
+        tests:
+          - unique
+          - not_null
+      - name: plan_name
+        data_type: string
+        description: "Name of plan"
+        tests:
+          - not_null
+      - name: monthly_price
+        data_type: int
+        description: "Monthly cost of plan"
+        tests:
+          - not_null
+
+  - name: bronze__subscriptions
+    description: "Raw subscription data with minimal transformation"
+    columns:
+      - name: subscription_id
+        data_type: string
+        description: "The primary key for the subscriptions table"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_type: string
+        description: "ID of customer"
+        tests:
+          - not_null
+      - name: plan_id
+        data_type: int
+        description: "ID of plan"
+        tests:
+          - not_null
+      - name: start_date
+        data_type: date
+        description: "Start date of subscription"
+        tests:
+          - not_null
+      - name: end_date
+        data_type: date
+        description: "End date of subscription (null if active subscription)"
+
         
 
