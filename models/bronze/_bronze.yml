@@ -11,17 +11,19 @@ models:
         tests:
           - unique
           - not_null
-      - name: signup_date
+      - name: customer_signup_date
         data_type: date
         description: "Sign-up date for customer"
         tests:
           - not_null
-      - name: status
+      - name: customer_status
         data_type: string
         description: "Customer status"
         tests:
           - not_null
-      - name: region
+          - accepted_values:
+              values: ['active', 'canceled']
+      - name: customer_region
         data_type: string
         description: "Customer region"
 
@@ -39,11 +41,14 @@ models:
         description: "Name of plan"
         tests:
           - not_null
-      - name: monthly_price
-        data_type: int
+      - name: plan_monthly_price
+        data_type: integer
         description: "Monthly cost of plan"
         tests:
           - not_null
+          - dbt_utils.accepted_range: # require all costs to be at least $0 
+              min_value: 0
+              inclusive: true
 
   - name: bronze__subscriptions
     description: "Raw subscription data with minimal transformation"
@@ -60,18 +65,15 @@ models:
         tests:
           - not_null
       - name: plan_id
-        data_type: int
+        data_type: string
         description: "ID of plan"
         tests:
           - not_null
-      - name: start_date
+      - name: subscription_start_date
         data_type: date
         description: "Start date of subscription"
         tests:
           - not_null
-      - name: end_date
+      - name: subscription_end_date
         data_type: date
         description: "End date of subscription (null if active subscription)"
-
-        
-
