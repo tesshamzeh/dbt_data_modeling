@@ -2,62 +2,37 @@
 version: 2
 
 models:
-  - name: bronze__customers
-    description: "Raw customer data with minimal transformation"
+  - name: silver__dim_customers
+    description: "Dimension table for customer entity (one row per customer)"
     columns:
       - name: customer_id
         data_type: string
         description: "ID of customer (primary key)"
-        tests:
-          - unique
-          - not_null
       - name: customer_signup_date
         data_type: date
         description: "Sign-up date for customer"
-        tests:
-          - not_null
       - name: customer_status
         data_type: string
         description: "Customer status"
-        tests:
-          - not_null
-          - accepted_values:
-              values: ['active', 'canceled']
       - name: customer_region
         data_type: string
         description: "Customer region"
-      - name: data_source 
-        data_type: string
-        description: "(Metadata) source of data"
 
-  - name: bronze__plans
-    description: "Raw plan data with minimal transformation"
+  - name: silver__dim_plans
+    description: "Dimension table for plan entity (one row per plan)"
     columns:
       - name: plan_id
         data_type: string
         description: "ID of plan (primary key)"
-        tests:
-          - unique
-          - not_null
       - name: plan_name
         data_type: string
         description: "Name of plan"
-        tests:
-          - not_null
       - name: plan_monthly_price
         data_type: decimal(10,2)
         description: "Monthly cost of plan"
-        tests:
-          - not_null
-          - dbt_utils.accepted_range: # require all costs to be at least $0 
-              min_value: 0
-              inclusive: true
-      - name: data_source
-        data_type: string
-        description: "(Metadata) source of data"
 
-  - name: bronze__subscriptions
-    description: "Raw subscription data with minimal transformation"
+  - name: silver__fact_subscriptions
+    description: "Fact table for subscription records (one row per customer & plan)"
     columns:
       - name: subscription_id
         data_type: string
@@ -67,12 +42,12 @@ models:
           - not_null
       - name: customer_id
         data_type: string
-        description: "ID of customer (foreign key to bronze__customers)"
+        description: "ID of customer (foreign key to silver__dim_customers)"
         tests:
           - not_null
       - name: plan_id
         data_type: string
-        description: "ID of plan (foreign key to bronze__plans)"
+        description: "ID of plan (foreign key to silver__dim_plans)"
         tests:
           - not_null
       - name: subscription_start_date
@@ -83,6 +58,6 @@ models:
       - name: subscription_end_date
         data_type: date
         description: "End date of subscription (null if active subscription)"
-      - name: data_source
-        data_type: string
-        description: "(Metadata) source of data"
+      - name: plan_monthly_price
+        data_type: decimal(10,2)
+        description: "Monthly cost of plan"
