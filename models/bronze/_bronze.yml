@@ -58,13 +58,13 @@ models:
         description: "(Metadata) source of data"
 
   - name: bronze__subscriptions
+    description: "Raw subscription data with minimal transformation"
     tests:
       - dbt_utils.expression_is_true: # no subscription end dates before start dates
           arguments:
             expression: >
               subscription_end_date is null
               or subscription_end_date >= subscription_start_date
-    description: "Raw subscription data with minimal transformation"
     columns:
       - name: subscription_id
         data_type: string

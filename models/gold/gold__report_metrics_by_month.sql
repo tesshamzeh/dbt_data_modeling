@@ -1,6 +1,6 @@
 select
     subs.year_month,
-    count(subs.*) as active_customers,
+    count(distinct subs.customer_id) as active_customers,
     sum(subs.plan_monthly_price) as monthly_recurring_revenue,
     churns.logo_churn_rate
 from {{ ref('gold__subscriptions_by_month') }} as subs

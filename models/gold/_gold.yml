@@ -88,6 +88,10 @@ models:
         - plan ID
         - plan monthly price
       for subscriptions active at any point during the month
+    tests:
+      - dbt_utils.unique_combination_of_columns: 
+          arguments:
+            combination_of_columns: ["year_month", "subscription_id"]
     columns:
       - name: year_month
         data_type: date
@@ -97,6 +101,8 @@ models:
       - name: subscription_id
         data_type: string
         description: "ID of subscription"
+        tests:
+          - not_null
       - name: customer_id
         data_type: string
         description: "ID of customer"

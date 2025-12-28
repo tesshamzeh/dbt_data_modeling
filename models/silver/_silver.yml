@@ -39,9 +39,21 @@ models:
       - name: customer_id
         data_type: string
         description: "ID of customer (foreign key to silver__dim_customers)"
+        tests:
+          - not_null
+          - relationships: # enforce foreign key integrity
+              arguments:
+                to: ref('silver__dim_customers')
+                field: customer_id
       - name: plan_id
         data_type: string
         description: "ID of plan (foreign key to silver__dim_plans)"
+        tests:
+          - not_null
+          - relationships: # enforce foreign key integrity
+              arguments:
+                to: ref('silver__dim_plans')
+                field: plan_id
       - name: subscription_start_date
         data_type: date
         description: "Start date of subscription"
