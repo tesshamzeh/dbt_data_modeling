@@ -26,10 +26,6 @@ vars:
   as_of_date: "2025-12-27" # for consistent reproducibility of reporting
 
 models:
-  +persist_docs: # make documentation available in data warehouse (outside of dbt docs)
-    relation: true
-    columns: true
-
   take_home_dbt:
     bronze:
       +materialized: table

@@ -72,8 +72,8 @@ models:
       - name: logo_churn_rate
         data_type: decimal(10,2)
         description: >
-          "(# customers active at any point last month but not this month [aka churned]) divided by
-           (# customers active last month), represented as a decimal between 0 and 1 inclusive"
+          (# customers active at any point last month but not this month [aka churned]) divided by
+          (# customers active last month), represented as a decimal between 0 and 1 inclusive
         tests:
           - dbt_utils.accepted_range: # no negative logo churn
               arguments:

@@ -7,6 +7,9 @@ models:
       - name: customer_id
         data_type: string
         description: "ID of customer (primary key)"
+        tests:
+          - unique
+          - not_null
       - name: customer_signup_date
         data_type: date
         description: "Sign-up date for customer"
@@ -23,6 +26,9 @@ models:
       - name: plan_id
         data_type: string
         description: "ID of plan (primary key)"
+        tests:
+          - unique
+          - not_null
       - name: plan_name
         data_type: string
         description: "Name of plan"
@@ -36,6 +42,9 @@ models:
       - name: subscription_id
         data_type: string
         description: "ID of subscription (primary key)"
+        tests:
+          - unique
+          - not_null
       - name: customer_id
         data_type: string
         description: "ID of customer (foreign key to silver__dim_customers)"
