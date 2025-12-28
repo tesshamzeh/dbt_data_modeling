@@ -43,12 +43,13 @@ customers_active_last_month as (
         all
 )
 
+-- calculate churn rate, include numerator and denominator
 select
     cast(active.year_month as date) as year_month,
     coalesce(churned.churned_customers, 0) as churned_customers,
     active.active_customers_last_month,
-    round(coalesce(churned.churned_customers, 0) * 1.0
-    / nullif(active.active_customers_last_month, 0),2) as logo_churn_rate
+    try_cast(coalesce(churned.churned_customers, 0) * 1.0
+    / nullif(active.active_customers_last_month, 0) as decimal(10,2)) as logo_churn_rate
 from customers_active_last_month as active
 left join churned
   on active.year_month = churned.year_month

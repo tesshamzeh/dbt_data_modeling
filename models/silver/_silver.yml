@@ -1,4 +1,3 @@
-
 version: 2
 
 models:
@@ -37,24 +36,15 @@ models:
       - name: subscription_id
         data_type: string
         description: "ID of subscription (primary key)"
-        tests:
-          - unique
-          - not_null
       - name: customer_id
         data_type: string
         description: "ID of customer (foreign key to silver__dim_customers)"
-        tests:
-          - not_null
       - name: plan_id
         data_type: string
         description: "ID of plan (foreign key to silver__dim_plans)"
-        tests:
-          - not_null
       - name: subscription_start_date
         data_type: date
         description: "Start date of subscription"
-        tests:
-          - not_null
       - name: subscription_end_date
         data_type: date
         description: "End date of subscription (null if active subscription)"

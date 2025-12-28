@@ -18,17 +18,24 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-clean-targets:         # directories to be removed by `dbt clean`
+clean-targets: # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
 models:
+  +persist_docs: # make documentation available in data warehouse (outside of dbt docs)
+    relation: true
+    columns: true
+
   take_home_dbt:
     bronze:
       +materialized: table
+      +tags: ["bronze"]
     
     silver:
       +materialized: table
+      +tags: ["silver"]
 
     gold:
       +materialized: view
+      +tags: ["gold"]

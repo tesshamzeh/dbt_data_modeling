@@ -2,13 +2,20 @@ version: 2
 
 sources:
   - name: raw_data
+    meta:
+      active: true
+      owner: "analytics.engineers@articulate.com"
+      operator: "data.engineers@articulate.com"
     tables:
       - name: customers
+        description: "Raw customer data from csv"
         config:
           external_location: "data/customers.csv"
       - name: plans
+        description: "Raw plan data from csv"
         config:
           external_location: "data/plans.csv"
       - name: subscriptions
+        description: "Raw subscription data from csv"
         config:
           external_location: "data/subscriptions.csv"

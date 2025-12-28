@@ -3,5 +3,5 @@ select
     try_cast(signup_date as date) as customer_signup_date, 
     try_cast(status as string) as customer_status,
     try_cast(region as string) as customer_region,
-    'data/customers.csv' as data_source
+    {{ source('raw_data', 'customers') }} as data_source
 from {{ source('raw_data', 'customers') }}

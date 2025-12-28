@@ -1,0 +1,114 @@
+version: 2
+
+models:
+  - name: gold__logo_churn_by_month
+    description: |
+      Report of monthly 
+        - logo churn (churned customers)
+        - previous month's active customers
+        - logo churn rate
+    columns:
+      - name: year_month
+        data_type: date
+        description: "Monthly date (e.g., 2025-12-01 for the month of December 2025)"
+        tests:
+          - not_null
+      - name: churned_customers
+        data_type: integer
+        description: "Number of customers active at any point in the previous month but not the current month"
+        tests:
+          - dbt_utils.accepted_range: # no negative churned customers
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: active_customers_last_month
+        data_type: integer
+        description: "Number of customers active at any point in the previous month"
+        tests:
+          - dbt_utils.accepted_range: # no negative revenue
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: logo_churn_rate
+        data_type: decimal(10,2)
+        description: >
+          (# customers active at any point last month but not this month [aka churned]) divided by
+          (# customers active last month), represented as a decimal between 0 and 1 inclusive
+        tests:
+          - dbt_utils.accepted_range: # no logo churn rate less than 0 or greater than 1
+              arguments:  
+                min_value: 0
+                max_value: 1
+                inclusive: true
+
+  - name: gold__report_metrics_by_month
+    description: |
+      Report of monthly
+        - active customers (active at any time during the month)
+        - recurring revenue (active at any time during the month)
+        - logo churn (active at any point the previous month but not the current month)
+    columns:
+      - name: year_month
+        data_type: date
+        description: "Monthly date (e.g., 2025-12-01 for the month of December 2025)"
+        tests:
+          - not_null
+      - name: active_customers
+        data_type: integer
+        description: "Number of active customers in a month (active at any point in the month)"
+        tests:
+          - dbt_utils.accepted_range: # no negative active customers
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: monthly_recurring_revenue
+        data_type: decimal(10,2)
+        description: "Monthly revenue generated from plans (active at any point in the month)"
+        tests:
+          - dbt_utils.accepted_range: # no negative revenue
+              arguments:
+                min_value: 0
+                inclusive: true
+      - name: logo_churn_rate
+        data_type: decimal(10,2)
+        description: >
+          "(# customers active at any point last month but not this month [aka churned]) divided by
+           (# customers active last month), represented as a decimal between 0 and 1 inclusive"
+        tests:
+          - dbt_utils.accepted_range: # no negative logo churn
+              arguments:
+                min_value: 0
+                inclusive: true
+    
+  - name: gold__subscriptions_by_month
+    description: |
+      Monthly spine-expanded table of
+        - subscription ID 
+        - customer ID
+        - plan ID
+        - plan monthly price
+      for subscriptions active at any point during the month
+    columns:
+      - name: year_month
+        data_type: date
+        description: "Monthly date (e.g., 2025-12-01 for the month of December 2025)"
+        tests:
+          - not_null
+      - name: subscription_id
+        data_type: string
+        description: "ID of subscription"
+      - name: customer_id
+        data_type: string
+        description: "ID of customer"
+        tests:
+          - not_null
+      - name: plan_id
+        data_type: string
+        description: "ID of plan"
+        tests:
+          - not_null
+      - name: plan_monthly_price
+        data_type: decimal(10,2)
+        description: "Monthly cost of plan"
+        tests:
+          - not_null

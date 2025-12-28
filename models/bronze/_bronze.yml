@@ -1,4 +1,3 @@
-
 version: 2
 
 models:
@@ -18,11 +17,12 @@ models:
           - not_null
       - name: customer_status
         data_type: string
-        description: "Customer status"
+        description: "Customer status (active or canceled)"
         tests:
           - not_null
           - accepted_values:
-              values: ['active', 'canceled']
+              arguments:
+                values: ['active', 'canceled']
       - name: customer_region
         data_type: string
         description: "Customer region"
@@ -50,13 +50,20 @@ models:
         tests:
           - not_null
           - dbt_utils.accepted_range: # require all costs to be at least $0 
-              min_value: 0
-              inclusive: true
+              arguments:
+                min_value: 0
+                inclusive: true
       - name: data_source
         data_type: string
         description: "(Metadata) source of data"
 
   - name: bronze__subscriptions
+    tests:
+      - dbt_utils.expression_is_true: # no subscription end dates before start dates
+          arguments:
+            expression: >
+              subscription_end_date is null
+              or subscription_end_date >= subscription_start_date
     description: "Raw subscription data with minimal transformation"
     columns:
       - name: subscription_id
