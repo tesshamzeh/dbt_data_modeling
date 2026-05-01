@@ -10,7 +10,7 @@ To run this code yourself, see [requirements](https://github.com/tesshamzeh/dbt_
 
 ### Assumptions
 
-- Given the nature of a take-home assessment and the short timeframe, I assumed the three data sources `id` columns were their primary keys, thus assuming that each `id` was unique and not null and represented a single customer, plan, or subscription (thus I did not have to create more complex surrogate primary keys since I lacked the context). 
+- Given the nature of a take-home assessment and the short timeframe, I assumed the three data sources' `id` columns were their primary keys, thus assuming that each `id` was unique and not null and represented a single customer, plan, or subscription (thus I did not have to create more complex surrogate primary keys since I lacked the context). 
 - For the `customers` data, I assumed / it seemed that it was the **current** status for a customer reflected in the table, as evidenced by the fact that there is not another line for C3 for when they had been active.
 - For the `plans` data, I assumed that the `monthly_price` values are the **only** prices these plans have ever had, and that this list of plans is exhaustive. 
 - For the `subscriptions` data, I assumed a null `end_date` meant the subscription was still active. 
