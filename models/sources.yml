@@ -4,8 +4,8 @@ sources:
   - name: raw_data
     meta:
       active: true
-      owner: "analytics.engineers@articulate.com"
-      operator: "data.engineers@articulate.com"
+      owner: "analytics.engineers@company.com"
+      operator: "data.engineers@company.com"
     tables:
       - name: customers
         description: "Raw customer data from csv"
