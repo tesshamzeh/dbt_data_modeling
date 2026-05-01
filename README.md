@@ -1,6 +1,6 @@
 # dbt Take-Home Assessment
 
-This repo contains a dbt project that transforms raw `customers`, `plans`, and `subscriptions` data into clean models, including a report called [gold__report_metrics_by_month](https://github.com/tesshamzeh/dbt_data_modeling/blob/main/models/gold/gold__report_metrics_by_month.sql) that provides `Active Customers`, `Monthly Recurring Revenue`, and `Logo Churn Rate` at a monthly grain. 
+This repo contains a dbt project that transforms raw `customers`, `plans`, and `subscriptions` [data](https://github.com/tesshamzeh/dbt_data_modeling/tree/main/data) into clean models, including a report called [gold__report_metrics_by_month](https://github.com/tesshamzeh/dbt_data_modeling/blob/main/models/gold/gold__report_metrics_by_month.sql) that provides `Active Customers`, `Monthly Recurring Revenue`, and `Logo Churn Rate` at a monthly grain. 
 
 For a static copy of the docs website for this project (generated via `dbt docs generate`), see [here](https://tesshamzeh.github.io/dbt_data_modeling/#!/overview). 
 
