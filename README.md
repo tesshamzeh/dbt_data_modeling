@@ -15,7 +15,7 @@ To run this code yourself, see [requirements](https://github.com/tesshamzeh/dbt_
 - For the `plans` data, I assumed that the `monthly_price` values are the **only** prices these plans have ever had, and that this list of plans is exhaustive. 
 - For the `subscriptions` data, I assumed a null `end_date` meant the subscription was still active. 
 - For calculating **all** reporting metrics, if a customer's subscription was active at least one day in a month, they counted as an active customer for that month. This is something I would alter to be more reflective of real-world conditions if I had more time (see [Proposed Next Steps](#proposed-next-steps) section). 
-- I assumed there would be at least one active subscription in the dataset to establish the reporting window. With more time, I would instead generate a fixed calendar spine through the current date.”
+- I assumed there would be at least one active subscription in the dataset to establish the reporting window. With more time, I would instead generate a fixed calendar spine through the current date.
 
 ### Design Choices
 
